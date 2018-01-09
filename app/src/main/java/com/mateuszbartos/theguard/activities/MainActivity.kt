@@ -3,8 +3,10 @@ package com.mateuszbartos.theguard.activities
 import android.os.Bundle
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.mateuszbartos.theguard.R
+import com.mateuszbartos.theguard.fragments.CamerasFragment
+import com.mateuszbartos.theguard.fragments.SensorsFragment
 import kotlinx.android.synthetic.main.activity_with_action_bar.*
-import java.util.ArrayList
+import java.util.*
 
 class MainActivity : BottomBarActivity() {
 
@@ -19,7 +21,7 @@ class MainActivity : BottomBarActivity() {
         super.onCreate(savedInstanceState)
         prepareBottomBar()
 
-//        openFragment(RoomsPreviewFragment.newInstance(eventInfo.id(), eventInfo.name()), RoomsPreviewFragment.TAG)
+        openFragment(CamerasFragment.newInstance(), CamerasFragment.TAG)
     }
 
     override fun setBottomBarItems() {
@@ -37,32 +39,32 @@ class MainActivity : BottomBarActivity() {
     }
 
     override fun setBottomBarListeners() {
-//        bottomNavigation.setOnTabSelectedListener { position, wasSelected ->
-//            if (wasSelected) {
-//                return@setOnTabSelectedListener false
-//            }
-//
-//            val currentItem = this.bottomBarItems[position]
-//            when (currentItem) {
-//                MainActivity.BottomBarItems.CAMERAS -> {
-//                    addFragment(RoomsPreviewFragment.newInstance(eventInfo.id(), eventInfo.name()), false, RoomsPreviewFragment.TAG)
-//                }
-//
-//                MainActivity.BottomBarItems.SENSORS -> {
-//                    addFragment(AgendaFragment.newInstance(eventInfo), false, AgendaFragment.TAG)
-//                }
-//
-//                MainActivity.BottomBarItems.ALERTS -> {
+        bottomNavigation.setOnTabSelectedListener { position, wasSelected ->
+            if (wasSelected) {
+                return@setOnTabSelectedListener false
+            }
+
+            val currentItem = this.bottomBarItems[position]
+            when (currentItem) {
+                MainActivity.BottomBarItems.CAMERAS -> {
+                    addFragment(CamerasFragment.newInstance(), false, CamerasFragment.TAG)
+                }
+
+                MainActivity.BottomBarItems.SENSORS -> {
+                    addFragment(SensorsFragment.newInstance(), false, SensorsFragment.TAG)
+                }
+
+                MainActivity.BottomBarItems.ALERTS -> {
 //                    addFragment(PartnersFragment.newInstance(eventInfo), false, PartnersFragment.TAG)
-//                }
-//
-//                MainActivity.BottomBarItems.SETTINGS -> {
+                }
+
+                MainActivity.BottomBarItems.SETTINGS -> {
 //                    addFragment(CaseFragment.newInstance(), false, CaseFragment.TAG)
-//                }
-//
-//                else -> return@setOnTabSelectedListener false
-//            }
-//            true
-//        }
+                }
+
+                else -> return@setOnTabSelectedListener false
+            }
+            true
+        }
     }
 }

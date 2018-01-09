@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.mateuszbartos.theguard.R
 
-class CamerasFragment : BaseFragment() {
+class SensorsFragment : BaseFragment() {
     companion object {
-        val TAG = CamerasFragment::class.java.simpleName!!
+        val TAG = SensorsFragment::class.java.simpleName!!
 
-        fun newInstance(): CamerasFragment {
-            return CamerasFragment()
+        fun newInstance(): SensorsFragment {
+            return SensorsFragment()
         }
     }
 
