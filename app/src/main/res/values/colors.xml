@@ -12,5 +12,5 @@
     <color name="colorNoteText">#595959</color>
     <color name="colorTabIconInactive">#666666</color>
     <color name="colorToolbar">#fdad3f</color>
-    <color name="colorTransparentActionBar">#7f000000</color>
+    <color name="colorLightOverlay">#7f000000</color>
 </resources>

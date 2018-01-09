@@ -1,7 +1,8 @@
-package com.mateuszbartos.theguard
+package com.mateuszbartos.theguard.activities
 
 import android.os.Bundle
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
+import com.mateuszbartos.theguard.R
 import kotlinx.android.synthetic.main.activity_with_action_bar.*
 import java.util.ArrayList
 

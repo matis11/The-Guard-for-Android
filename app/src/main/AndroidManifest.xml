@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.mateuszbartos.theguard.SplashActivity"
+            android:name="com.mateuszbartos.theguard.activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name="com.mateuszbartos.theguard.MainActivity"
+            android:name="com.mateuszbartos.theguard.activities.MainActivity"
             android:screenOrientation="portrait">
         </activity>
 

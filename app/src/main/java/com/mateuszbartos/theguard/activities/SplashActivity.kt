@@ -1,4 +1,4 @@
-package com.mateuszbartos.theguard
+package com.mateuszbartos.theguard.activities
 
 import android.content.Intent
 import android.os.Bundle
