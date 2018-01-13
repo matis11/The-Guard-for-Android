@@ -29,7 +29,7 @@ class SensorsFirebaseStore {
 
         val pathReference = database.getReference(basePath)
 
-        pathReference.addListenerForSingleValueEvent(object : ValueEventListener {
+        pathReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.value.toString()
                 val type = object : TypeToken<List<SensorData>>() {}.type
@@ -69,7 +69,7 @@ class SensorsFirebaseStore {
         val pathReference = database.getReference(basePath)
         val list: MutableList<String> = ArrayList()
 
-        pathReference.addListenerForSingleValueEvent(object : ValueEventListener {
+        pathReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 dataSnapshot.children.mapTo(list) { it.key }
 

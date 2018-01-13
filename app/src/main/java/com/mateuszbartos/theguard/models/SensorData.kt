@@ -1,3 +1,17 @@
 package com.mateuszbartos.theguard.models
 
-data class SensorData(val name: String, val value: Double)
+import com.jacekmarchwicki.universaladapter.BaseAdapterItem
+
+data class SensorData(val name: String, val value: Double) : BaseAdapterItem {
+    override fun adapterId(): Long {
+        return hashCode().toLong()
+    }
+
+    override fun same(item: BaseAdapterItem): Boolean {
+        return equals(item)
+    }
+
+    override fun matches(item: BaseAdapterItem): Boolean {
+        return item is SensorData && item.adapterId() == adapterId()
+    }
+}
