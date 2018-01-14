@@ -17,7 +17,7 @@ class SensorsFirebaseStore {
     private val gson: Gson = GsonProvider.get()
 
     constructor() {
-        basePath = "fdsf2423f/"
+        basePath = "sensor/rasp0Serial/"
     }
 
     constructor(customPath: String) {
@@ -63,15 +63,29 @@ class SensorsFirebaseStore {
         pathReference.push().setValue(serializedData)
     }
 
-    fun listObservable(): Observable<List<String>> {
-        val listSubject: BehaviorSubject<List<String>> = BehaviorSubject.create()
+    fun listObservable(): Observable<List<SensorData>> {
+        val listSubject: BehaviorSubject<List<SensorData>> = BehaviorSubject.create()
 
         val pathReference = database.getReference(basePath)
-        val list: MutableList<String> = ArrayList()
+        val list: MutableList<SensorData> = ArrayList()
 
         pathReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                dataSnapshot.children.mapTo(list) { it.key }
+                list.clear()
+
+                dataSnapshot.children.mapTo(list) {
+                    val sensorValueMap = it.value as HashMap<*, *>
+                    val sensorValue = sensorValueMap["value"]
+                    val doubleValue: Double
+
+                    doubleValue = try {
+                        sensorValue as Double
+                    } catch (e: Exception) {
+                        (sensorValue as Long).toDouble()
+                    }
+
+                    SensorData(it.key, doubleValue)
+                }
 
                 listSubject.onNext(list)
             }

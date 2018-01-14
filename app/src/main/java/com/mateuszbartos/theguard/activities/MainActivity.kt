@@ -2,13 +2,20 @@ package com.mateuszbartos.theguard.activities
 
 import android.os.Bundle
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
 import com.mateuszbartos.theguard.R
 import com.mateuszbartos.theguard.fragments.CamerasFragment
 import com.mateuszbartos.theguard.fragments.SensorsFragment
 import kotlinx.android.synthetic.main.activity_with_action_bar.*
 import java.util.*
 
+
 class MainActivity : BottomBarActivity() {
+
+    companion object {
+        const val RC_SIGN_IN = 123
+    }
 
     private enum class BottomBarItems {
         CAMERAS, SENSORS, ALERTS, SETTINGS
@@ -20,8 +27,23 @@ class MainActivity : BottomBarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         prepareBottomBar()
-
         openFragment(CamerasFragment.newInstance(), CamerasFragment.TAG)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user == null) {
+            val providers = Arrays.asList(AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build())
+
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(providers)
+                            .build(),
+                    RC_SIGN_IN)
+        }
     }
 
     override fun setBottomBarItems() {

@@ -12,7 +12,7 @@ class SensorsPresenter(val deviceList: List<String>) {
 
     init {
         val sensorsFirebaseStore = SensorsFirebaseStore()
-        sensorsFirebaseStore.readObservable()
+        sensorsFirebaseStore.listObservable()
                 .subscribe(sensorDataLoadedSubject)
     }
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mateuszbartos.theguard.R
 
+
 class CamerasFragment : BaseFragment() {
     companion object {
         val TAG = CamerasFragment::class.java.simpleName!!
