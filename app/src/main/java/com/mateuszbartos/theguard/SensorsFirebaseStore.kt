@@ -6,7 +6,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.mateuszbartos.theguard.models.SensorData
+import com.mateuszbartos.theguard.models.ApiDto
 import rx.Observable
 import rx.subjects.BehaviorSubject
 
@@ -17,22 +17,22 @@ class SensorsFirebaseStore {
     private val gson: Gson = GsonProvider.get()
 
     constructor() {
-        basePath = "sensor/rasp0Serial/"
+        basePath = "sensor/00000000fb021b9a/"
     }
 
     constructor(customPath: String) {
         basePath = customPath
     }
 
-    fun readObservable(): Observable<List<SensorData>> {
-        val dataSubject: BehaviorSubject<List<SensorData>> = BehaviorSubject.create()
+    fun readObservable(): Observable<List<ApiDto>> {
+        val dataSubject: BehaviorSubject<List<ApiDto>> = BehaviorSubject.create()
 
         val pathReference = database.getReference(basePath)
 
         pathReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.value.toString()
-                val type = object : TypeToken<List<SensorData>>() {}.type
+                val type = object : TypeToken<List<ApiDto>>() {}.type
 
                 dataSubject.onNext(gson.fromJson(value, type))
             }
@@ -45,7 +45,7 @@ class SensorsFirebaseStore {
         return dataSubject
     }
 
-    fun write(dataToSave: List<SensorData>) {
+    fun write(dataToSave: List<ApiDto>) {
         checkNotNull(dataToSave)
 
         val serializedData = gson.toJson(dataToSave)
@@ -54,7 +54,7 @@ class SensorsFirebaseStore {
         pathReference.setValue(serializedData)
     }
 
-    fun add(dataToAdd: List<SensorData>) {
+    fun add(dataToAdd: List<ApiDto>) {
         checkNotNull(dataToAdd)
 
         val serializedData = gson.toJson(dataToAdd)
@@ -63,11 +63,11 @@ class SensorsFirebaseStore {
         pathReference.push().setValue(serializedData)
     }
 
-    fun listObservable(): Observable<List<SensorData>> {
-        val listSubject: BehaviorSubject<List<SensorData>> = BehaviorSubject.create()
+    fun listObservable(): Observable<List<ApiDto>> {
+        val listSubject: BehaviorSubject<List<ApiDto>> = BehaviorSubject.create()
 
         val pathReference = database.getReference(basePath)
-        val list: MutableList<SensorData> = ArrayList()
+        val list: MutableList<ApiDto> = ArrayList()
 
         pathReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -84,7 +84,7 @@ class SensorsFirebaseStore {
                         (sensorValue as Long).toDouble()
                     }
 
-                    SensorData(it.key, doubleValue)
+                    ApiDto(it.key, doubleValue)
                 }
 
                 listSubject.onNext(list)

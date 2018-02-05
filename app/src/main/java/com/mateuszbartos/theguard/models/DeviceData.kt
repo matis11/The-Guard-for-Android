@@ -2,7 +2,7 @@ package com.mateuszbartos.theguard.models
 
 import com.jacekmarchwicki.universaladapter.BaseAdapterItem
 
-data class SensorData(val name: String, val value: Double) : BaseAdapterItem {
+data class DeviceData(val name: String, val value: Double) : BaseAdapterItem {
     override fun adapterId(): Long {
         return hashCode().toLong()
     }
@@ -12,6 +12,6 @@ data class SensorData(val name: String, val value: Double) : BaseAdapterItem {
     }
 
     override fun matches(item: BaseAdapterItem): Boolean {
-        return item is SensorData && item.adapterId() == adapterId()
+        return item is DeviceData && item.adapterId() == adapterId()
     }
 }

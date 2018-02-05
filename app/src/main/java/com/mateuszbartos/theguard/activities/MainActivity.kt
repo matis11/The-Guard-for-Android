@@ -1,20 +1,26 @@
 package com.mateuszbartos.theguard.activities
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.mateuszbartos.theguard.R
+import com.mateuszbartos.theguard.api.ApiClient
+import com.mateuszbartos.theguard.api.ApiService
 import com.mateuszbartos.theguard.fragments.CamerasFragment
 import com.mateuszbartos.theguard.fragments.SensorsFragment
+import com.mateuszbartos.theguard.models.ApiDto
 import kotlinx.android.synthetic.main.activity_with_action_bar.*
 import java.util.*
+
 
 
 class MainActivity : BottomBarActivity() {
 
     companion object {
-        const val RC_SIGN_IN = 123
+        private const val RC_SIGN_IN = 123
+        private const val KEY_TOKEN = "token"
     }
 
     private enum class BottomBarItems {
@@ -26,6 +32,7 @@ class MainActivity : BottomBarActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ApiClient.initApi()
         prepareBottomBar()
         openFragment(CamerasFragment.newInstance(), CamerasFragment.TAG)
     }
@@ -43,6 +50,12 @@ class MainActivity : BottomBarActivity() {
                             .setAvailableProviders(providers)
                             .build(),
                     RC_SIGN_IN)
+        } else {
+            user.getIdToken(true)
+                    .addOnCompleteListener {
+                        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+                        sharedPreferences.edit().putString(KEY_TOKEN, it.result.token).apply()
+                    }
         }
     }
 

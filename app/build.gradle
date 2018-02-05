@@ -65,6 +65,9 @@ dependencies {
     // Rx
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.jakewharton.rxbinding:rxbinding:1.0.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
 
     // UI
     implementation('com.aurelhubert:ahbottomnavigation:2.1.0') {

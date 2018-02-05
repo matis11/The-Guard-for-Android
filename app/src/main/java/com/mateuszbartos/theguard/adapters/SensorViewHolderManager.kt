@@ -10,19 +10,19 @@ import com.jacekmarchwicki.universaladapter.BaseAdapterItem
 import com.jacekmarchwicki.universaladapter.ViewHolderManager
 import com.jacekmarchwicki.universaladapter.ViewHolderManager.BaseViewHolder
 import com.mateuszbartos.theguard.R
-import com.mateuszbartos.theguard.models.SensorData
+import com.mateuszbartos.theguard.models.ApiDto
 import az.plainpie.animation.PieAngleAnimation
 
 
 class SensorViewHolderManager : ViewHolderManager {
 
-    override fun createViewHolder(parent: ViewGroup, inflater: LayoutInflater): BaseViewHolder<SensorData> {
+    override fun createViewHolder(parent: ViewGroup, inflater: LayoutInflater): BaseViewHolder<ApiDto> {
         return ViewHolder(inflater.inflate(R.layout.sensors_item, parent, false))
     }
 
-    /* package */ internal inner class ViewHolder(itemView: View) : BaseViewHolder<SensorData>(itemView) {
+    /* package */ internal inner class ViewHolder(itemView: View) : BaseViewHolder<ApiDto>(itemView) {
 
-        override fun bind(item: SensorData) {
+        override fun bind(item: ApiDto) {
             val pieView = this.itemView.findViewById<PieView>(R.id.pieView)
             val sensorName = this.itemView.findViewById<TextView>(R.id.sensorName)
 
@@ -57,7 +57,7 @@ class SensorViewHolderManager : ViewHolderManager {
     }
 
     override fun matches(baseAdapterItem: BaseAdapterItem): Boolean {
-        return baseAdapterItem is SensorData
+        return baseAdapterItem is ApiDto
     }
 
 
