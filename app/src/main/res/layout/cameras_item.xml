@@ -2,7 +2,7 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/room_preview_layout"
+    android:id="@+id/camera_preview_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="9dp"
@@ -14,13 +14,11 @@
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground">
 
-    <ImageView
-        android:id="@+id/room_preview_slide"
+    <View
+        android:id="@+id/camera_preview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alpha="0.8"
-        tools:layout_height="100dp"
-        tools:src="@color/colorBottomNavigationAccent"/>
+        android:layout_height="150dp"
+        android:alpha="0.8"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,7 +30,7 @@
         android:paddingTop="@dimen/base_margin">
 
         <TextView
-            android:id="@+id/room_preview_name"
+            android:id="@+id/camera_preview_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="22dp"
@@ -43,16 +41,16 @@
             tools:text="Kuchnia"/>
 
         <TextView
-            android:id="@+id/room_preview_presentation"
+            android:id="@+id/camera_preview_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/room_preview_name"
+            android:layout_below="@id/camera_preview_name"
             android:layout_marginRight="22dp"
             android:ellipsize="end"
             android:lines="1"
             android:textColor="@color/colorText"
             android:textSize="12sp"
-            tools:text="Systemy aktywne"/>
+            android:text="Brak zagrożeń"/>
     </RelativeLayout>
 
 </FrameLayout>

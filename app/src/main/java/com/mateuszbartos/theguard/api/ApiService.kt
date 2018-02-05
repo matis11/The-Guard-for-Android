@@ -1,6 +1,7 @@
 package com.mateuszbartos.theguard.api
 
 import com.mateuszbartos.theguard.models.ApiDto
+import com.mateuszbartos.theguard.models.Device
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -8,7 +9,7 @@ import rx.Observable
 
 interface ApiService {
     @POST("v1/devices/get")
-    fun getUserDevices(@Body device: ApiDto.DeviceOwner): Observable<Response<String>>
+    fun getUserDevices(@Body device: ApiDto.DeviceOwner): Observable<Response<List<Device>>>
 
     @POST("v1/devices/add")
     fun addDevice(@Body device: ApiDto.RegisterDevice): Observable<Response<String>>

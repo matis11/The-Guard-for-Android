@@ -3,11 +3,9 @@ package com.mateuszbartos.theguard.presenters
 import android.content.Context
 import android.preference.PreferenceManager
 import com.mateuszbartos.theguard.IgnoreOnComplete
-import com.mateuszbartos.theguard.SensorsFirebaseStore
 import com.mateuszbartos.theguard.api.ApiClient
 import com.mateuszbartos.theguard.models.ApiDto
 import com.mateuszbartos.theguard.models.Device
-import com.mateuszbartos.theguard.models.DeviceData
 import okhttp3.internal.http.RealResponseBody
 import retrofit2.Response
 import rx.Observable
@@ -15,10 +13,9 @@ import rx.schedulers.Schedulers
 import rx.subjects.BehaviorSubject
 import java.net.HttpURLConnection
 
+class CamerasPresenter(context: Context) {
 
-class SensorsPresenter(context: Context) {
-
-    private val sensorDataLoadedSubject = BehaviorSubject.create<List<DeviceData>>()
+    private val devicesSubject = BehaviorSubject.create<List<Device>>()
 
     init {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -31,12 +28,12 @@ class SensorsPresenter(context: Context) {
                 .subscribeOn(Schedulers.io())
                 .map { it.body() }
                 .flatMap { Observable.from(it) }
-                .flatMap { SensorsFirebaseStore(it.serial).listObservable() }
-                .subscribe(sensorDataLoadedSubject)
+                .toList()
+                .subscribe(devicesSubject)
     }
 
 
-    fun sensorDataLoadedObservable(): Observable<List<DeviceData>> {
-        return sensorDataLoadedSubject.asObservable()
+    fun devicesIdsObservable(): Observable<List<Device>> {
+        return devicesSubject.asObservable()
     }
 }

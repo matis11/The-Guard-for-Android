@@ -70,6 +70,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
 
     // UI
+    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
+    implementation 'com.github.aakira:exoplayer-manager:0.0.8@aar'
     implementation('com.aurelhubert:ahbottomnavigation:2.1.0') {
         exclude group: 'com.android.support', module: 'design'
     }

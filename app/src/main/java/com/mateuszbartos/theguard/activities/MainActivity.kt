@@ -15,12 +15,12 @@ import kotlinx.android.synthetic.main.activity_with_action_bar.*
 import java.util.*
 
 
-
 class MainActivity : BottomBarActivity() {
 
     companion object {
         private const val RC_SIGN_IN = 123
         private const val KEY_TOKEN = "token"
+        private const val KEY_EMAIL = "email"
     }
 
     private enum class BottomBarItems {
@@ -56,6 +56,9 @@ class MainActivity : BottomBarActivity() {
                         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
                         sharedPreferences.edit().putString(KEY_TOKEN, it.result.token).apply()
                     }
+
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+            sharedPreferences.edit().putString(KEY_EMAIL, user.email).apply()
         }
     }
 

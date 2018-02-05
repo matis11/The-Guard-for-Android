@@ -26,6 +26,10 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity
+            android:name="com.mateuszbartos.theguard.activities.PlayerActivity">
+        </activity>
+
 
     </application>
 
