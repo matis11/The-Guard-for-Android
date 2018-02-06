@@ -3,11 +3,9 @@ package com.mateuszbartos.theguard.presenters
 import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.mateuszbartos.theguard.IgnoreOnComplete
-import com.mateuszbartos.theguard.SensorsFirebaseStore
 import com.mateuszbartos.theguard.api.ApiClient
 import com.mateuszbartos.theguard.models.ApiDto
 import com.mateuszbartos.theguard.models.Device
-import com.mateuszbartos.theguard.models.DeviceData
 import okhttp3.internal.http.RealResponseBody
 import retrofit2.Response
 import rx.Observable
@@ -15,11 +13,10 @@ import rx.schedulers.Schedulers
 import rx.subjects.BehaviorSubject
 import java.net.HttpURLConnection
 
+class CamerasPresenter(context: Context) {
 
-class SensorsPresenter(context: Context) {
-
-    private val sensorDataLoadedSubject = BehaviorSubject.create<List<DeviceData>>()
     private val userTokenSubject = BehaviorSubject.create<String>()
+    private val devicesSubject = BehaviorSubject.create<List<Device>>()
 
     init {
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -39,15 +36,11 @@ class SensorsPresenter(context: Context) {
                 }
                 .map { it.body() }
                 .filter { it != null }
-                .flatMap { Observable.from(it) }
-                .flatMap {
-                    SensorsFirebaseStore(it.serial).listObservable()
-                }
-                .subscribe(sensorDataLoadedSubject)
+                .subscribe(devicesSubject)
     }
 
 
-    fun sensorDataLoadedObservable(): Observable<List<DeviceData>> {
-        return sensorDataLoadedSubject.asObservable()
+    fun devicesIdsObservable(): Observable<List<Device>> {
+        return devicesSubject.asObservable()
     }
 }

@@ -7,25 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import com.jacekmarchwicki.universaladapter.rx.RxUniversalAdapter
 import com.mateuszbartos.theguard.R
-import com.mateuszbartos.theguard.activities.PlayerActivity
-import com.mateuszbartos.theguard.adapters.CameraViewHolderManager
-import com.mateuszbartos.theguard.presenters.CamerasPresenter
-import kotlinx.android.synthetic.main.sensors_fragment.*
+import com.mateuszbartos.theguard.adapters.DeviceViewHolderManager
+import com.mateuszbartos.theguard.presenters.DevicesPresenter
+import kotlinx.android.synthetic.main.cameras_fragment.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.subjects.BehaviorSubject
 
-
-class CamerasFragment : BaseFragment() {
+class DevicesFragment : BaseFragment() {
     companion object {
-        val TAG = CamerasFragment::class.java.simpleName!!
+        val TAG = DevicesFragment::class.java.simpleName!!
 
-        fun newInstance(): CamerasFragment {
-            return CamerasFragment()
+        fun newInstance(): DevicesFragment {
+            return DevicesFragment()
         }
     }
 
     private val COLUMN_COUNT = 1
-    private var camerasPresenter: CamerasPresenter? = null
+    private var devicesPresenter: DevicesPresenter? = null
     private val cameraClicked: BehaviorSubject<String> = BehaviorSubject.create()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -36,26 +34,19 @@ class CamerasFragment : BaseFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        camerasPresenter = CamerasPresenter(context)
+        devicesPresenter = DevicesPresenter(context)
 
         val layoutManager = GridLayoutManager(context, COLUMN_COUNT)
         recyclerView.layoutManager = layoutManager
 
-        val viewHolderManager = CameraViewHolderManager(cameraClicked)
+        val viewHolderManager = DeviceViewHolderManager()
         val adapter = RxUniversalAdapter(listOf(viewHolderManager))
         recyclerView.adapter = adapter
 
         subscription.addAll(
-                camerasPresenter!!.devicesIdsObservable()
+                devicesPresenter!!.devicesIdsObservable()
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(adapter),
-
-                cameraClicked
-                        .doOnNext{println(it)}
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe {
-                            startActivity(PlayerActivity.newIntent(context, it))
-                        }
+                        .subscribe(adapter)
         )
     }
 

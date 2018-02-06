@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:plainpie="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/room_preview_layout"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:layout_marginBottom="9dp"
+    android:layout_marginLeft="27dp"
+    android:layout_marginRight="27dp"
+    android:layout_marginTop="9dp"
+    android:clickable="true"
+    android:elevation="4dp"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <az.plainpie.PieView
+        android:id="@+id/pieView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        plainpie:inner_pie_padding="30"
+        plainpie:inner_text_visibility="true"
+        plainpie:percentage="70"
+        plainpie:percentage_size="25"/>
+
+    <TextView
+        android:id="@+id/sensorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C02"
+        android:layout_marginTop="95dp"
+        android:textColor="@color/colorBottomNavigationInactive"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

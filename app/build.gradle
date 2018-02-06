@@ -47,6 +47,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    testImplementation 'junit:junit:4.12'
 
     // Support libs
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -54,16 +55,31 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:multidex:1.0.2'
-    testImplementation 'junit:junit:4.12'
+
+    // Firebase
+    implementation'com.google.firebase:firebase-core:11.4.2'
+    implementation 'com.google.firebase:firebase-database:11.4.2'
+    implementation 'com.google.firebase:firebase-auth:11.4.2'
+    implementation 'com.google.firebase:firebase-messaging:11.4.2'
+    implementation 'com.firebaseui:firebase-ui-auth:3.1.0'
 
     // Rx
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.jakewharton.rxbinding:rxbinding:1.0.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
 
     // UI
+    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
+    implementation 'com.github.aakira:exoplayer-manager:0.0.8@aar'
     implementation('com.aurelhubert:ahbottomnavigation:2.1.0') {
         exclude group: 'com.android.support', module: 'design'
     }
+    implementation 'com.github.zurche:plain-pie:v0.2.2'
+    implementation 'com.github.jacek-marchwicki.recyclerview-changes-detector:universal-adapter-rx:1.0.1'
+
+    implementation 'com.google.code.gson:gson:2.8.0'
 
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'

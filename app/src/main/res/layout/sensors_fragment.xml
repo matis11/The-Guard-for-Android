@@ -12,6 +12,13 @@
               android:paddingTop="@dimen/activity_vertical_margin"
               tools:context=".activities.MainActivity">
 
+    <TextView
+        android:id="@+id/testText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
+        tools:text="Testowy tekst"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -19,6 +26,6 @@
         android:layout_marginBottom="27dp"
         android:scrollbars="vertical"
         android:visibility="visible"
-        tools:listitem="@layout/cameras_item"/>
+        tools:listitem="@layout/sensors_item"/>
 
 </LinearLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/camera_preview_layout"
@@ -12,25 +12,42 @@
     android:clickable="true"
     android:elevation="4dp"
     android:focusable="true"
+    android:background="@color/cardview_dark_background"
     android:foreground="?attr/selectableItemBackground">
 
-    <View
-        android:id="@+id/camera_preview"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:alpha="0.8"/>
+    <RelativeLayout
+        android:id="@+id/logo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_foreground"/>
+    </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        android:background="@color/colorLightOverlay"
+        android:layout_alignParentRight="true">
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:thumbTint="@color/colorAccent"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
         android:paddingLeft="@dimen/text_left_margin"
-        android:paddingRight="@dimen/base_margin"
+        android:paddingRight="60dp"
+        android:orientation="vertical"
         android:paddingTop="@dimen/base_margin">
 
         <TextView
-            android:id="@+id/camera_preview_name"
+            android:id="@+id/device_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="22dp"
@@ -41,7 +58,7 @@
             tools:text="Kuchnia"/>
 
         <TextView
-            android:id="@+id/camera_preview_status"
+            android:id="@+id/device_serial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/camera_preview_name"
@@ -50,7 +67,7 @@
             android:lines="1"
             android:textColor="@color/colorText"
             android:textSize="12sp"
-            android:text="Brak zagrożeń"/>
-    </RelativeLayout>
+            android:text="ehjk3232bh"/>
+    </LinearLayout>
 
-</FrameLayout>
+</RelativeLayout>
