@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/camera_preview_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="9dp"
+    android:layout_marginLeft="27dp"
+    android:layout_marginRight="27dp"
+    android:layout_marginTop="9dp"
+    android:clickable="true"
+    android:elevation="4dp"
+    android:focusable="true"
+    android:background="@color/cardview_dark_background"
+    android:foreground="?attr/selectableItemBackground">
+
+    <RelativeLayout
+        android:id="@+id/logo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_foreground"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true">
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:thumbTint="@color/colorAccent"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:paddingLeft="@dimen/text_left_margin"
+        android:paddingRight="60dp"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/base_margin">
+
+        <TextView
+            android:id="@+id/device_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="22dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            tools:text="Kuchnia"/>
+
+        <TextView
+            android:id="@+id/device_serial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/camera_preview_name"
+            android:layout_marginRight="22dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/colorText"
+            android:textSize="12sp"
+            android:text="ehjk3232bh"/>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -9,6 +9,7 @@ import com.mateuszbartos.theguard.R
 import com.mateuszbartos.theguard.api.ApiClient
 import com.mateuszbartos.theguard.api.ApiService
 import com.mateuszbartos.theguard.fragments.CamerasFragment
+import com.mateuszbartos.theguard.fragments.DevicesFragment
 import com.mateuszbartos.theguard.fragments.SensorsFragment
 import com.mateuszbartos.theguard.models.ApiDto
 import kotlinx.android.synthetic.main.activity_with_action_bar.*
@@ -93,11 +94,11 @@ class MainActivity : BottomBarActivity() {
                 }
 
                 MainActivity.BottomBarItems.ALERTS -> {
-//                    addFragment(PartnersFragment.newInstance(eventInfo), false, PartnersFragment.TAG)
+//                    addFragment(AlertsFragment.newInstance(), false, AlertsFragment.TAG)
                 }
 
                 MainActivity.BottomBarItems.SETTINGS -> {
-//                    addFragment(CaseFragment.newInstance(), false, CaseFragment.TAG)
+                    addFragment(DevicesFragment.newInstance(), false, DevicesFragment.TAG)
                 }
 
                 else -> return@setOnTabSelectedListener false
