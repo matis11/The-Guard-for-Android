@@ -1,7 +1,7 @@
 package com.mateuszbartos.theguard.models
 
 class ApiDto {
-    data class DeviceOwner(val email: String, val token: String)
+    data class DeviceOwner(val owner: String, val token: String)
 
     data class RegisterDevice(val serial: String, val name: String, val token: String)
 

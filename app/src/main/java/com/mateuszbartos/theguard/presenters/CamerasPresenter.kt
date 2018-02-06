@@ -1,7 +1,7 @@
 package com.mateuszbartos.theguard.presenters
 
 import android.content.Context
-import android.preference.PreferenceManager
+import com.google.firebase.auth.FirebaseAuth
 import com.mateuszbartos.theguard.IgnoreOnComplete
 import com.mateuszbartos.theguard.api.ApiClient
 import com.mateuszbartos.theguard.models.ApiDto
@@ -15,20 +15,27 @@ import java.net.HttpURLConnection
 
 class CamerasPresenter(context: Context) {
 
+    private val userTokenSubject = BehaviorSubject.create<String>()
     private val devicesSubject = BehaviorSubject.create<List<Device>>()
 
     init {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val token = sharedPreferences.getString("token", "")
-        val email = sharedPreferences.getString("email", "")
+        val currentUser = FirebaseAuth.getInstance().currentUser
 
-        ApiClient.get().getUserDevices(ApiDto.DeviceOwner(email, token))
-                .onErrorReturn { Response.error(HttpURLConnection.HTTP_UNAVAILABLE, RealResponseBody(null, null)) }
-                .lift(IgnoreOnComplete<Response<List<Device>>>())
-                .subscribeOn(Schedulers.io())
+        currentUser
+                ?.getIdToken(true)
+                ?.addOnSuccessListener {
+                    userTokenSubject.onNext(it.token)
+                }
+
+        userTokenSubject
+                .flatMap {
+                    ApiClient.get().getUserDevices(ApiDto.DeviceOwner(currentUser?.email!!, it))
+                            .onErrorReturn { Response.error(HttpURLConnection.HTTP_UNAVAILABLE, RealResponseBody(null, null)) }
+                            .lift(IgnoreOnComplete<Response<List<Device>>>())
+                            .subscribeOn(Schedulers.io())
+                }
                 .map { it.body() }
-                .flatMap { Observable.from(it) }
-                .toList()
+                .filter { it != null }
                 .subscribe(devicesSubject)
     }
 

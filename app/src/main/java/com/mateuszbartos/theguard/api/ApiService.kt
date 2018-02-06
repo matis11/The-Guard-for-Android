@@ -14,9 +14,6 @@ interface ApiService {
     @POST("v1/devices/add")
     fun addDevice(@Body device: ApiDto.RegisterDevice): Observable<Response<String>>
 
-    @POST("v1/devices/assign")
-    fun assignDevice(@Body device: ApiDto.DeviceOwner): Observable<Response<String>>
-
     @POST("v1/devices/changeRaspName")
     fun changeName(@Body device: ApiDto.DeviceName): Observable<Response<String>>
 

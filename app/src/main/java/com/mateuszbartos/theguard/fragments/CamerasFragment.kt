@@ -51,6 +51,7 @@ class CamerasFragment : BaseFragment() {
                         .subscribe(adapter),
 
                 cameraClicked
+                        .doOnNext{println(it)}
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
                             startActivity(PlayerActivity.newIntent(context, it))

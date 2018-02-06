@@ -32,14 +32,14 @@ class CameraViewHolderManager(val cameraClicked: Observer<String>) : ViewHolderM
 
             subscription.addAll(
                     RxView.clicks(cameraLayout)
-                            .map { "http://52.236.165.15:80/hls/${item.serial}.m3u8"}
-                            .subscribe { cameraClicked }
+                            .map { "http://52.236.165.15:80/hls/${item.serial}.m3u8" }
+                            .subscribe(cameraClicked)
             )
         }
     }
 
     override fun matches(baseAdapterItem: BaseAdapterItem): Boolean {
-        return baseAdapterItem is DeviceData
+        return baseAdapterItem is Device
     }
 
 }

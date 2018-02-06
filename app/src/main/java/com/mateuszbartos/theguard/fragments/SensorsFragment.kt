@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.jacekmarchwicki.universaladapter.rx.RxUniversalAdapter
 import com.mateuszbartos.theguard.R
 import com.mateuszbartos.theguard.adapters.SensorViewHolderManager
+import com.mateuszbartos.theguard.models.DeviceData
 import com.mateuszbartos.theguard.presenters.SensorsPresenter
 import kotlinx.android.synthetic.main.sensors_fragment.*
 import rx.android.schedulers.AndroidSchedulers
@@ -23,6 +24,7 @@ class SensorsFragment : BaseFragment() {
 
     private val COLUMN_COUNT = 2
     private var sensorsPresenter: SensorsPresenter? = null
+    private var adapterItems: ArrayList<DeviceData> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.sensors_fragment, container, false)
@@ -43,6 +45,7 @@ class SensorsFragment : BaseFragment() {
 
         subscription.addAll(
                 sensorsPresenter!!.sensorDataLoadedObservable()
+                        .map { adapterItems.plus(it) }
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(adapter)
         )
